@@ -1,3 +1,4 @@
+import moment from 'moment'
 import mongo from '../libs/mongo'
 import config from '../config'
 import scitran from '../libs/scitran'
@@ -53,7 +54,10 @@ const getDatasetHistory = () => {
  * Combine the mongo job logs with the scitran projects logs
  */
 const mergeLogs = (jobLogs, projectLogs) => {
-  return jobLogs.concat(projectLogs)
+  const merged = jobLogs.concat(projectLogs)
+  const descDateSort = (a, b) => moment(b.date) - moment(a.date)
+  const sorted = merged.sort(descDateSort)
+  return sorted
 }
 
 // handlers ----------------------------------------------------------------
