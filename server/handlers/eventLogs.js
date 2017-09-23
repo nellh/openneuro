@@ -88,6 +88,7 @@ const handlers = {
     })
   },
   getDatasetHistory,
+  mergeLogs,
 }
 
 export default handlers
