@@ -122,6 +122,17 @@ export default {
     )
   },
 
+  /*
+   * Request the full list of projects
+   * Returns unsanitized data!
+   */
+  getAllProjects(callback) {
+    const options = {
+      query: { metadata: false },
+    }
+    request.get(config.scitran.url + 'projects', options, callback)
+  },
+
   /**
      * Update Project
      *
