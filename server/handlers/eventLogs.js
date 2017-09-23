@@ -12,10 +12,12 @@ let events = Object.keys(config.events)
  */
 const mapProjectData = project => {
   return {
-    datasetId: project._id,
-    datasetLabel: project.label,
-    created: project.created,
-    modified: project.modified,
+    dataset: {
+      datasetId: project._id,
+      datasetLabel: project.label,
+      created: project.created,
+      modified: project.modified,
+    },
   }
 }
 
