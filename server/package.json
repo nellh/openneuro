@@ -20,7 +20,7 @@
   "dependencies": {
     "ajv": "4.9.0",
     "async": "^2.4.1",
-    "aws-sdk": "2.50.0",
+    "aws-sdk": "2.163.0",
     "babel-core": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "bids-validator": "^0.24.0",
