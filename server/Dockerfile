@@ -1,4 +1,4 @@
-FROM node:6.12.0-alpine
+FROM node:8.9.1-alpine
 
 # install server app
 ADD . /srv
