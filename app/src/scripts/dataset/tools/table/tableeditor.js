@@ -1,14 +1,12 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Reflux from 'reflux'
 import actions from './tableeditor.actions.js'
 import ReactDataGrid from 'react-data-grid'
 import TableEditorStore from './tableeditor.store.js'
 import { refluxConnect } from '../../../utils/reflux'
-const PropTypes = require('prop-types')
-// next line is only required until ron-react-autocomplete is rebuilt and republished
-require('react').PropTypes = PropTypes
-require('react').createClass = require('create-react-class')
-const { Data: { Selectors } } = require('react-data-grid-addons')
+import { Data } from 'react-data-grid-addons'
+const Selectors = Data.Selectors
 
 class NoToolbar extends React.Component {
   componentWillReceiveProps(nextProps) {

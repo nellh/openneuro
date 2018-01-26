@@ -2,11 +2,8 @@ import Reflux from 'reflux'
 import Actions from './tableeditor.actions.js'
 import files from '../../../utils/files'
 import update from 'immutability-helper'
-const PropTypes = require('prop-types')
-// next line is only required until ron-react-autocomplete is rebuilt and republished
-require('react').PropTypes = PropTypes
-require('react').createClass = require('create-react-class')
-const { Data: { Selectors } } = require('react-data-grid-addons')
+import { Data } from 'react-data-grid-addons'
+const Selectors = Data.Selectors
 
 let TableEditorStore = Reflux.createStore({
   // store setup -------------------------------------------------------------------
@@ -36,7 +33,7 @@ let TableEditorStore = Reflux.createStore({
    * Sets the state to the data object defined
    * inside the function. Also takes a diffs object
    * which will set the state to the initial state
-   * with any differences passed. 
+   * with any differences passed.
    */
   setInitialState: function(diffs) {
     let data = {
