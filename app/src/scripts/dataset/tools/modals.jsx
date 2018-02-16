@@ -6,6 +6,7 @@ import Reflux from 'reflux'
 import Share from './share.jsx'
 import Jobs from './jobs'
 import Publish from './publish.jsx'
+import Snapshot from './snapshot.jsx'
 import FileDisplay from '../dataset.file-display.jsx'
 import FileEdit from '../dataset.file-edit.jsx'
 import Subscribe from './subscribe.jsx'
@@ -76,6 +77,10 @@ class ToolModals extends Reflux.Component {
           onHide={datasetActions.toggleModal.bind(null, 'subscribe')}
           subscribed={this.state.datasets.dataset.subscribed}
           createSubscription={datasetActions.createSubscription}
+        />
+        <Snapshot
+          show={this.state.datasets.modals.snapshot}
+          onHide={datasetActions.toggleModal.bind(null, 'snapshot')}
         />
       </div>
     )
