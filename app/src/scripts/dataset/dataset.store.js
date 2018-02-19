@@ -725,6 +725,29 @@ let datasetStore = Reflux.createStore({
   },
 
   /**
+   * Update CHANGES
+   */
+  updateCHANGES(value, callback) {
+    let dataset = this.data.dataset
+
+    scitran
+      .updateFileFromString(
+        'projects',
+        this.data.dataset._id,
+        'CHANGES',
+        value,
+        '',
+        [],
+      )
+      .then(res => {
+        callback(null, res)
+        dataset.CHANGES = value
+        this.update({ dataset })
+        this.updateModified()
+      })
+  },
+
+  /**
    * Dismiss Metadata Issue
    */
   dismissMetadataIssue(key) {
@@ -1763,6 +1786,7 @@ let datasetStore = Reflux.createStore({
               'No modifications have been made since the last snapshot was created. Please use the most recent snapshot.',
           })
         } else {
+          console.log('getProject results:', project)
           crn.createSnapshot(datasetId).then(res => {
             let snapshotId = res.body._id
             this.toggleSidebar(true)
