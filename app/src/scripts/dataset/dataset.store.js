@@ -1813,7 +1813,7 @@ let datasetStore = Reflux.createStore({
                 '/datasets/' +
                 this.data.dataset.linkID +
                 '/versions/' +
-                snapshotId
+                bids.decodeId(snapshotId)
               history.push(url)
             }
             this.loadSnapshots(this.data.dataset, [], () => {

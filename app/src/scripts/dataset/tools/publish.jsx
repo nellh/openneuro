@@ -230,12 +230,17 @@ class Publish extends Reflux.Component {
    * Hide
    */
   _hide() {
-    this.setState({
-      loading: false,
-      selectedSnapshot: '',
-      message: null,
-      error: false,
-    })
+    this.setState(
+      {
+        loading: false,
+        selectedSnapshot: '',
+        message: null,
+        error: false,
+      },
+      () => {
+        actions.showDatasetComponent('', this.props.history)
+      },
+    )
   }
 
   /**
