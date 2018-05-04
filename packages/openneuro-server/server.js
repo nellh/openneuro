@@ -8,6 +8,9 @@ import config from './config'
 import createApp from './app'
 import packageJson from './package.json'
 
+// eslint-disable-next-line no-console
+process.on('unhandledRejection', r => console.log(r))
+
 const redisConnect = async () => {
   try {
     const redis = await redis_connect(config.redis)
