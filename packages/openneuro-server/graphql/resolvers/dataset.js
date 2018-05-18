@@ -26,6 +26,7 @@ export const createSnapshot = (obj, { datasetId, tag }) => {
  * Add files to a draft
  */
 export const updateFiles = (obj, { datasetId, files: fileTree }) => {
+  console.log('UPDATE FILES CALLED WITH DATASET ID:', datasetId, ' AND FILETREE:', fileTree)  
   // TODO - The id returned here is a placeholder
   const promises = updateFilesTree(datasetId, fileTree)
   return Promise.all(promises).then(() => ({
@@ -44,11 +45,13 @@ export const updateFilesTree = (datasetId, fileTree) => {
   // drafts just need something to invalidate client cache
   const { name, files, directories } = fileTree
   const filesPromises = files.map(file =>
-    datalad.addFile(datasetId, name, file),
+    datalad.updateFile(datasetId, name, file),
   )
   const dirPromises = directories.map(tree => updateFilesTree(datasetId, tree))
   return filesPromises.concat(...dirPromises)
 }
+
+
 
 /**
  * Update the dataset Public status
