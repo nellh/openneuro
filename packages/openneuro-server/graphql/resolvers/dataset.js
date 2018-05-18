@@ -26,7 +26,6 @@ export const createSnapshot = (obj, { datasetId, tag }) => {
  * Add files to a draft
  */
 export const updateFiles = (obj, { datasetId, files: fileTree }) => {
-  console.log('UPDATE FILES CALLED WITH DATASET ID:', datasetId, ' AND FILETREE:', fileTree)  
   // TODO - The id returned here is a placeholder
   const promises = updateFilesTree(datasetId, fileTree)
   return Promise.all(promises).then(() => ({
@@ -51,12 +50,9 @@ export const updateFilesTree = (datasetId, fileTree) => {
   return filesPromises.concat(...dirPromises)
 }
 
-
-
 /**
  * Update the dataset Public status
  */
 export const updatePublic = (obj, { datasetId, publicFlag}) => {
-  console.log('hit the updatePublic resolver!')
   return datalad.updatePublic(datasetId, publicFlag)
 }
