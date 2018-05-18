@@ -100,7 +100,7 @@ const encodeFilePath = path => {
 const fileUrl = (datasetId, path, filename) => {
   // If path is provided, this is a subdirectory, otherwise a root level file.
   const filePath = path ? [path, filename].join('/') : filename
-  const fileName = encodeFilePath(filePath)
+  const fileName = filename ? encodeFilePath(filePath) : encodeFilePath(path)
   const url = `http://${uri}/datasets/${datasetId}/files/${fileName}`
   return url
 }
@@ -143,6 +143,16 @@ export const updateFile = (datasetId, path, file) => {
       ),
     )
   })
+}
+
+/**
+ * Delete an existing file in a dataset
+ */
+export const deleteFile = (datasetId, path, file) => {
+  // Cannot use superagent 'request' due to inability to post streams
+  let url = fileUrl(datasetId, path, file.name)
+  console.log('sending deleteFile request to datalad path:', url)
+  return request.del(url)
 }
 
 /**
