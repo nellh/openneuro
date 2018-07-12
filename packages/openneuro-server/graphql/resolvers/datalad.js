@@ -1,6 +1,10 @@
 import { summary } from './summary.js'
 import { issues } from './issues.js'
-import { getDraftFiles, getPartialStatus } from '../../datalad/draft.js'
+import {
+  getDraftFiles,
+  getPartialStatus,
+  getPartialFiles,
+} from '../../datalad/draft.js'
 import { getSnapshot, getSnapshots } from '../../datalad/snapshots.js'
 import { dataset } from './dataset.js'
 
@@ -10,6 +14,7 @@ import { dataset } from './dataset.js'
 export const draft = obj => ({
   id: obj.revision,
   files: () => getDraftFiles(obj.id, obj.revision),
+  partialFiles: () => getPartialFiles(obj.id),
   summary: () => summary(obj),
   issues: () => issues(obj),
   modified: obj.modified,

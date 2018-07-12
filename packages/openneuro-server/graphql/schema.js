@@ -138,7 +138,10 @@ const typeDefs = `
     authors: [Author]
     summary: Summary
     issues: [ValidationIssue]
+    # Return committed files
     files: [DatasetFile]
+    # Return all files including uncommitted
+    partialFiles: [DatasetFile]
     # Flag if a dataset operation is incomplete (and may be reverted or resumed)
     partial: Boolean
   }

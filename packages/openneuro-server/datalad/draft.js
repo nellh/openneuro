@@ -13,20 +13,30 @@ const draftFilesKey = (datasetId, revision) => {
   return `openneuro:draftFiles:${datasetId}:${revision}`
 }
 
-export const getDraftFiles = async (datasetId, revision) => {
+/**
+ * Return potentially dirty git trees by skipping cache
+ */
+export const getPartialFiles = datasetId => {
   const filesUrl = `${uri}/datasets/${datasetId}/files`
+  return request
+    .get(filesUrl)
+    .set('Accept', 'application/json')
+    .then(({ body: { files } }) => files.map(addFileUrl(datasetId)))
+}
+
+/**
+ * Return the most recent committed file tree, from cache if possible
+ */
+export const getDraftFiles = async (datasetId, revision) => {
   const key = draftFilesKey(datasetId, revision)
   return redis.get(key).then(data => {
     if (data) return JSON.parse(data)
     else
-      return request
-        .get(filesUrl)
-        .set('Accept', 'application/json')
-        .then(({ body: { files } }) => {
-          const filesWithUrls = files.map(addFileUrl(datasetId))
-          redis.set(key, JSON.stringify(filesWithUrls))
-          return filesWithUrls
-        })
+      return getPartialFiles(datasetId).then(filesWithUrls => {
+        // Update cache
+        redis.set(key, JSON.stringify(filesWithUrls))
+        return filesWithUrls
+      })
   })
 }
 
